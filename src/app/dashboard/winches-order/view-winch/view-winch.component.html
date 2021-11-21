@@ -1,0 +1,128 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-spin-clockwise-fade-rotating" [fullScreen] = "true"></ngx-spinner>
+<div class="adddistrict">
+    <div class="container">
+    <div class="card shadow ">
+        <h4 class="card-header">
+          بيانات طلب الونش 
+        </h4>
+        <div class="card-body">
+            <form class="example-form" #form="ngForm" >
+                <div class="row">
+                <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill">
+                  <mat-label>طلب الاوردر</mat-label>
+                  <input matInput 
+                  [(ngModel)]="orderId" 
+                  name= "orderId"  
+                  autocomplete="off"
+                  readonly>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill">
+                  <mat-label>حالة الطلب</mat-label>
+                  <input matInput 
+                  [(ngModel)]="state" 
+                  name= "state"  
+                  autocomplete="off"
+                  readonly>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>اسم الونش</mat-label>
+                    <input matInput 
+                    [(ngModel)]="winchName" 
+                    name= "winchName"  
+                    autocomplete="off"
+                    readonly>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>رقم السيارة</mat-label>
+                    <input matInput 
+                    [(ngModel)]="carNumber" 
+                    name= "carNumber"  
+                    autocomplete="off"
+                    readonly>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>التاريخ</mat-label>
+                    <input matInput 
+                    [(ngModel)]="date" 
+                    name= "date"  
+                    autocomplete="off"
+                    readonly>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>السعر</mat-label>
+                    <input matInput 
+                    [(ngModel)]="price" 
+                    name= "price"  
+                    autocomplete="off"
+                    readonly>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>سعر التوصيل</mat-label>
+                    <input matInput 
+                    [(ngModel)]="deliveryFees" 
+                    name= "deliveryFees"  
+                    autocomplete="off"
+                    readonly>
+                </mat-form-field>
+            </div>
+            
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>سبب الرفض</mat-label>
+                    <input matInput 
+                    [(ngModel)]="cancel" 
+                    name= "cancel"  
+                    autocomplete="off"
+                    readonly>
+                </mat-form-field>
+            </div>
+            
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>اسم العميل</mat-label>
+                    <input matInput 
+                    [(ngModel)]="clientName" 
+                    name= "clientName"  
+                    autocomplete="off"
+                    readonly>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>رقم هاتف العميل</mat-label>
+                    <input matInput 
+                    [(ngModel)]="clientPhone" 
+                    name= "clientPhone"  
+                    autocomplete="off"
+                    readonly>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>البريد الالكترونى للعميل</mat-label>
+                    <input matInput 
+                    [(ngModel)]="clientEmail" 
+                    name= "clientEmail"  
+                    autocomplete="off"
+                    readonly>
+                </mat-form-field>
+            </div>
+        </div>
+        </form>
+        </div>
+      </div>
+    </div>
+    </div>

@@ -1,0 +1,72 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-spin-clockwise-fade-rotating" [fullScreen] = "true"></ngx-spinner>
+<div class="adddistrict">
+    <div class="container">
+    <div class="card shadow ">
+        <h4 class="card-header" *ngIf="!updateFlag">
+          البيانات الشخصية
+        </h4>
+        <div class="card-body">
+            <form class="example-form" #form="ngForm" >
+                <div class="row">
+                <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="nameControl.invalid && nameControl.touched">
+                  <mat-label>الاسم</mat-label>
+                  <input matInput 
+                  [(ngModel)]="name" 
+                  name= "name"  
+                  autocomplete="off"
+                  required
+                  readonly
+                  #nameControl="ngModel">
+                  <mat-error class="text-danger" *ngIf="nameControl.invalid && nameControl.touched">يجب ادخال الاسم</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="emailControl.invalid && emailControl.touched">
+                    <mat-label>البريد الالكترونى</mat-label>
+                    <input matInput 
+                    [(ngModel)]="email" 
+                    name= "email"  
+                    autocomplete="off"
+                    required
+                    readonly
+                    #emailControl="ngModel">
+                    <mat-error class="text-danger" *ngIf="emailControl.invalid && emailControl.touched">يجب ادخال الاسم البريد الالكترونى</mat-error>
+                  </mat-form-field>
+            </div>
+            <div class="col-md-6">
+            <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="phoneControl.invalid && phoneControl.touched">
+              <mat-label>رقم الهاتف</mat-label>
+              <input matInput 
+              [(ngModel)]="phone" 
+              name= "phone"  
+              autocomplete="off"
+              readonly
+              required
+              #phoneControl="ngModel">
+              <mat-error class="text-danger" *ngIf="phoneControl.invalid && phoneControl.touched">يجب ادخال رقم الهاتف</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-md-6">
+            <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="typeControl.invalid && typeControl.touched">
+                <mat-label>نوع المشرف</mat-label>
+                <input matInput 
+                [(ngModel)]="type" 
+                name= "type"  
+                readonly
+                autocomplete="off"
+                required
+                #typeControl="ngModel">
+                <mat-error class="text-danger" *ngIf="typeControl.invalid && typeControl.touched">يجب ادخال الاسم نوع المشرف</mat-error>
+              </mat-form-field>
+        </div>
+        </div>
+        <!-- <div class="flex-button">
+            <button mat-raised-button 
+            color="primary">اضف</button>
+        </div>       -->
+        </form>
+        </div>
+      </div>
+    </div>
+    </div>

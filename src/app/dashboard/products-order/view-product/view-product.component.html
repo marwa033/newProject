@@ -1,0 +1,122 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-spin-clockwise-fade-rotating" [fullScreen] = "true"></ngx-spinner>
+<div class="adddistrict">
+    <div class="container">
+    <div class="card shadow ">
+        <h4 class="card-header">
+          بيانات طلب المنتج
+        </h4>
+        <!-- <h4 class="card-header" *ngIf="updateFlag">
+          تعديل منطقة 
+        </h4> -->
+        <div class="card-body">
+            <form class="example-form" #form="ngForm" >
+                <div class="row">
+                <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill">
+                  <mat-label>طلب الاوردر</mat-label>
+                  <input matInput 
+                  [(ngModel)]="orderId" 
+                  name= "orderId"  
+                  autocomplete="off"
+                  readonly>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill">
+                  <mat-label>حالة الطلب</mat-label>
+                  <input matInput 
+                  [(ngModel)]="state" 
+                  name= "state"  
+                  autocomplete="off"
+                  readonly>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>اسم العميل</mat-label>
+                    <input matInput 
+                    [(ngModel)]="clientName" 
+                    name= "clientName"  
+                    autocomplete="off"
+                    readonly>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>رقم هاتف العميل</mat-label>
+                    <input matInput 
+                    [(ngModel)]="clientPhone" 
+                    name= "clientPhone"  
+                    autocomplete="off"
+                    readonly>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>التاريخ</mat-label>
+                    <input matInput 
+                    [(ngModel)]="date" 
+                    name= "date"  
+                    autocomplete="off"
+                    readonly>
+                </mat-form-field>
+            </div>
+            
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>تاريخ الوصول </mat-label>
+                    <input matInput 
+                    [(ngModel)]="arrivedAt" 
+                    name= "arrivedAt"  
+                    autocomplete="off"
+                    readonly>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>السعر</mat-label>
+                    <input matInput 
+                    [(ngModel)]="price" 
+                    name= "price"  
+                    autocomplete="off"
+                    readonly>
+                </mat-form-field>
+            </div>
+            
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>الوصف</mat-label>
+                    <textarea matInput 
+                    [(ngModel)]="description" 
+                    name= "description"  
+                    autocomplete="off"
+                    readonly></textarea>
+                </mat-form-field>
+            </div>
+            
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>سبب الالغاء</mat-label>
+                    <textarea matInput 
+                    [(ngModel)]="cancelReason" 
+                    name= "cancelReason"  
+                    autocomplete="off"
+                    readonly></textarea>
+                </mat-form-field>
+            </div>
+        </div>
+        <!-- <div class="flex-button">
+            <button mat-raised-button 
+            color="primary"
+            *ngIf="!updateFlag"
+            [disabled]="form.invalid">اضف</button>
+            <button mat-raised-button 
+            color="primary"
+            *ngIf="updateFlag"
+            [disabled]="form.invalid">تعديل</button>
+        </div>       -->
+        </form>
+        </div>
+      </div>
+    </div>
+    </div>

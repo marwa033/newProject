@@ -1,0 +1,25 @@
+*{
+    direction: rtl;
+    text-align: right;
+    font-family: "Almarai";
+}
+.mat-form-field{
+    width: 100%;
+    font-family: "Almarai";
+}
+.flex-button{
+    display: flex;
+    justify-content: flex-end;
+}
+button{
+    font-family: "Almarai";
+}
+
+.rid{
+    display: none;
+    }img{
+        width: 150px;
+        height: 150px;
+        padding:5px;
+        border-radius: 50%;
+    }

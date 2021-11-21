@@ -1,0 +1,127 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-spin-clockwise-fade-rotating" [fullScreen] = "true"></ngx-spinner>
+<div class="container-fluide">
+    <form #form="ngForm" >
+    <div class="mat-elevation-z8 example-container">
+  
+    <table mat-table [dataSource]="dataSource" >
+    
+       <ng-container matColumnDef="count">
+        <th mat-header-cell *matHeaderCellDef> {{'ID' | translate}} </th>
+        <td mat-cell *matCellDef="let element; let i = index;"> {{paginator.pageIndex * paginator.pageSize + i + 1}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="orderId">
+        <th mat-header-cell *matHeaderCellDef> {{'رقم الطلب' | translate}} </th>
+        <td mat-cell *matCellDef="let element"> {{element?.orderId }} </td>
+      </ng-container>
+
+      
+      <ng-container matColumnDef="deliveryFees">
+        <th mat-header-cell *matHeaderCellDef> {{'السعر' | translate}} </th>
+        <td mat-cell *matCellDef="let element"> {{element?.price }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="state">
+        <th mat-header-cell *matHeaderCellDef> {{'الحالة' | translate}} </th>
+        <td mat-cell *matCellDef="let element"> {{element?.state }} </td>
+      </ng-container>
+      
+      <ng-container matColumnDef="district">
+        <th mat-header-cell *matHeaderCellDef> {{'المنطقة' | translate}} </th>
+        <td mat-cell *matCellDef="let element"> {{element?.address?.district.name}} </td>
+      </ng-container>
+      
+        
+        <!-- Name Column -->
+        <ng-container matColumnDef="createdAt">
+          <th mat-header-cell *matHeaderCellDef> {{'انشاء' | translate}} </th>
+          <td mat-cell *matCellDef="let element"> {{element.date | date:'d/M/yyy' }} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef class="pointer"> {{'Action' | translate}} </th>
+          <td mat-cell *matCellDef="let element">
+            <mat-icon style="color:rgb(223, 7, 54)"class="pointer"  (click)="stateRow(element)" 
+            (click)="openLg(content)" >
+              line_weight </mat-icon>
+              
+            <mat-icon style="color:rgb(223, 220, 7)"class="pointer"  title="الغاء" (click)="stateRow(element)" 
+            (click)="openSm(cancel)" >
+              cancel </mat-icon>
+              <mat-icon style="color:rgb(7, 223, 187)"class="pointer" (click)="viewElemment(element)" >visibility</mat-icon>
+          </td>
+        </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    
+    </div>
+  </form>
+  </div>
+
+
+
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">حالة الطلب </h4>
+    </div>
+    <form #form="ngForm" (ngSubmit)="Activation(form.value)">
+    <div class="modal-body">
+        <section class="row">
+            <section class="col-md-12">
+                <mat-form-field>
+                    <mat-label>الحالة</mat-label>
+                    <mat-select name="state"  [(ngModel)]="state">
+                      <mat-option value="pending">{{'pending' | translate}}</mat-option>
+                      <mat-option value="processing">{{'processing' | translate}}</mat-option>
+                      <mat-option value="carried">{{'carried' | translate}}</mat-option>
+                      <mat-option value="arrived">{{'arrived' | translate}}</mat-option>
+                      <mat-option value="approved">{{'approved' | translate}}</mat-option>
+                      <mat-option value="canceled">{{'canceled' | translate}}</mat-option>
+                      <!-- <mat-option value="finish">{{'finish' | translate}}</mat-option> -->
+                    </mat-select>
+                  </mat-form-field>
+            </section>
+            <section class="col-md-12">
+                <mat-form-field>
+                    <input matInput placeholder="{{'السعر' | translate}}" name="price" autocomplete="off" [(ngModel)]="price">
+                </mat-form-field>
+            </section>
+            <section class="col-md-12">              
+              <mat-form-field >
+                <mat-label>تاريخ الوصول</mat-label>
+                <input matInput [matDatepicker]="picker" [(ngModel)]="arrivalDate" name="arrivalDate">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+        </section>
+        </section>
+   </div>
+    <div class="modal-footer">
+      <button class="primary-bg" (click)="addState()" mat-raised-button>{{'اضف' | translate}}</button>
+    </div>
+  </form> 
+  </ng-template>
+
+
+  <ng-template #cancel let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">الغاء الطلب </h4>
+    </div>
+    <form #form="ngForm" (ngSubmit)="Cancel(form.value)">
+    <div class="modal-body">
+        <section class="row">
+            <section class="col-md-12">
+                <mat-form-field>
+                    <textarea matInput placeholder="{{'سبب الالغاء' | translate}}" name="description" [(ngModel)]="description"></textarea>
+                </mat-form-field>
+            </section>
+        </section>
+   </div>
+    <div class="modal-footer">
+      <button class="danger-bg" mat-raised-button>{{'الغاء' | translate}}</button>
+    </div>
+  </form> 
+  </ng-template>

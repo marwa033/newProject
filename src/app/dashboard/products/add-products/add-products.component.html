@@ -1,0 +1,131 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-spin-clockwise-fade-rotating" [fullScreen] = "true"></ngx-spinner>
+
+<div class="addcar">
+    <div class="container">
+    <div class="card shadow ">
+        <h4 class="card-header"
+        *ngIf="!updateFlag">
+          اضافة منتج جديده
+        </h4>
+        <h4 class="card-header"
+        *ngIf="updateFlag">
+          تعديل منتج 
+        </h4>
+        <div class="card-body">
+            <form class="example-form" #form="ngForm" (ngSubmit)="Add(form.value)">
+                <div class="row">
+                <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="arControl.invalid && arControl.touched">
+                  <mat-label>الاسم بالغه العربية</mat-label>
+                  <input matInput [(ngModel)]="arname"
+                   name= "arname"
+                   autocomplete="off"
+                   required
+                   #arControl="ngModel">
+                   <mat-error class="text-danger" *ngIf="arControl.invalid && arControl.touched">يجب ادخال الاسم بالغه العربية</mat-error>
+               </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="enControl.invalid && enControl.touched">
+                    <mat-label>الاسم بالغه الانجليزية</mat-label>
+                    <input matInput 
+                    [(ngModel)]="enname"
+                    autocomplete="off"
+                    name= "enname"
+                    required
+                    #enControl="ngModel">
+                    <mat-error class="text-danger" *ngIf="arControl.invalid && arControl.touched">يجب ادخال الاسم بالغه الانجليزية</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="priceControl.invalid && priceControl.touched">
+                    <mat-label>السعر</mat-label>
+                    <input matInput type="number"
+                    [(ngModel)]="price"
+                    autocomplete="off" 
+                    name= "price"
+                    required
+                    #priceControl>
+                    <mat-error class="text-danger" *ngIf="priceControl.invalid && priceControl.touched">يجب ادخال السعر</mat-error>
+                  </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="arDescription.invalid && arDescription.touched">
+                    <mat-label>الوصف باللغه العربية</mat-label>
+                    <textarea matInput 
+                    [(ngModel)]="ardescription" 
+                    name="ardescription"
+                    autocomplete="off"
+                    required
+                    #arDescription="ngModel"></textarea>
+                    <mat-error class="text-danger" *ngIf="arDescription.invalid && arDescription.touched">يجب ادخال الوصف بالغة العربية</mat-error>
+                  </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="enDescription.invalid && enDescription.touched">
+                    <mat-label>الوصف باللغه الانجليزية</mat-label>
+                    <textarea matInput 
+                    [(ngModel)]="endescription" 
+                    name="endescription"
+                    autocomplete="off"
+                    required
+                    #enDescription="ngModel"></textarea>
+                    <mat-error class="text-danger" *ngIf="enDescription.invalid && enDescription.touched">يجب ادخال الوصف بالغة الانجليزية</mat-error>
+                  </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field appearance="fill" [class.has-error]="categoryControl.invalid && categoryControl.touched">
+                    <mat-label>الفئة</mat-label>
+                    <mat-select 
+                    [(ngModel)]="parentId"
+                    name="parentId"
+                    required
+                    #categoryControl="ngModel"
+                    (ngModelChange)="onChange($event)">
+                      <mat-option *ngFor="let category of categories" [value]="category._id">
+                        {{category.name}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error class="text-danger" *ngIf="categoryControl.invalid && categoryControl.touched">يجب ادخال الفئة</mat-error>
+                  </mat-form-field>
+            </div>
+            
+            <div class="col-md-6">
+              <mat-form-field appearance="fill" [class.has-error]="subcategoryControl.invalid && subcategoryControl.touched">
+                  <mat-label>sub category</mat-label>
+                  <mat-select 
+                  [(ngModel)]="categoryId"
+                  name="categoryId"
+                  required
+                  #subcategoryControl="ngModel">
+                    <mat-option *ngFor="let sub of subcategory" [value]="sub._id">
+                      {{sub.name}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error class="text-danger" *ngIf="subcategoryControl.invalid && subcategoryControl.touched">يجب ادخال الفئة</mat-error>
+                </mat-form-field>
+          </div>
+            <div class="col-md-6">
+                <img [src]="imageSrc" style="max-width:300px;max-height:300px"
+                onerror= "this.src='assets/img/1274512-placeholder.png';"/><br>
+                <button (click)="uploadFile()" type="button" mat-raised-button >Upload</button>
+            <mat-form-field class="rid">
+                <input matInput placeholder="Color" name="imageSrc" [(ngModel)] = "imageSrc">
+            </mat-form-field>
+            </div>
+        </div>
+        <div class="flex-button">
+            <button mat-raised-button 
+            color="primary"
+            *ngIf="!updateFlag"
+            [disabled]="form.invalid">اضف</button>
+            <button mat-raised-button 
+            color="primary"
+            *ngIf="updateFlag"
+            [disabled]="form.invalid">تعديل</button>
+        </div>      
+        </form>
+        </div>
+      </div>
+    </div>
+    </div>

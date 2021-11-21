@@ -1,0 +1,195 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-spin-clockwise-fade-rotating" [fullScreen] = "true"></ngx-spinner>
+<div class="addcar">
+    <div class="container">
+    <div class="card shadow ">
+        <h4 class="card-header"
+        *ngIf="!updateFlag">
+        اضافة كود خصم جديد
+        </h4>
+        <h4 class="card-header"
+        *ngIf="updateFlag">
+          تعديل كود خصم 
+        </h4>
+        <div class="card-body">
+            <form class="example-form" #form="ngForm" (ngSubmit)="Add(form.value)">
+                <div class="row">
+                <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="codeControl.invalid && codeControl.touched">
+                  <mat-label>كود</mat-label>
+                  <input matInput 
+                  [(ngModel)]="code"
+                   name= "code"
+                   autocomplete="off"
+                   required
+                   #codeControl="ngModel">  
+                  <mat-error class="text-danger" *ngIf="codeControl.invalid && codeControl.touched">يجب ادخال الكود</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="daysControl.invalid && daysControl.touched">
+                    <mat-label>الايام</mat-label>
+                    <input matInput 
+                    [(ngModel)]="days" 
+                    name= "days"
+                    autocomplete="off"
+                    required
+                    #daysControl="ngModel">
+                    <mat-error class="text-danger" *ngIf="daysControl.invalid && daysControl.touched">يجب ادخال عدد</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="totalControl.invalid && totalControl.touched">
+                    <mat-label>عدد الاستخدام </mat-label>
+                    <input matInput 
+                    [(ngModel)]="total" 
+                    name= "total"
+                    autocomplete="off"
+                    required
+                    #totalControl="ngModel">
+                    <mat-error class="text-danger" *ngIf="totalControl.invalid && totalControl.touched">يجب ادخال عدد الاستخدام</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field appearance="fill" [class.has-error]="maxControl.invalid && maxControl.touched">
+                    <mat-label>الحد الاقصى للمستخدمين</mat-label>
+                    <input matInput 
+                    [(ngModel)]="max" 
+                    autocomplete="off"
+                    name= "max"
+                    required
+                    #maxControl="ngModel">
+                    <mat-error class="text-danger" *ngIf="maxControl.invalid && maxControl.touched">يجب ادخال الحد الاقصى</mat-error>
+                  </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field appearance="fill" [class.has-error]="amountControl.invalid && amountControl.touched">
+                    <mat-label>العدد</mat-label>
+                    <input matInput 
+                    [(ngModel)]="amount" 
+                    autocomplete="off"
+                    name= "amount"
+                    required
+                    #amountControl="ngModel">
+                    <mat-error class="text-danger" *ngIf="amountControl.invalid && amountControl.touched">يجب ادخال العدد</mat-error>
+                  </mat-form-field>
+            </div>
+            
+            <div class="col-md-6" >
+                <mat-form-field appearance="fill" [class.has-error]="typeControl.invalid && typeControl.touched">
+                    <mat-label>النوع</mat-label>
+                    <mat-select [(ngModel)]="type" 
+                    name="type"
+                    required
+                    #typeControl="ngModel"
+                    >
+                      <mat-option value="amount">Amount</mat-option>
+                      <mat-option value="percentage">Percentage</mat-option>
+                    </mat-select>
+                    <mat-error class="text-danger" *ngIf="typeControl.invalid && typeControl.touched">يجب ادخال النوع</mat-error>
+                  </mat-form-field>
+            </div>
+
+            <div class="col-md-6" >
+                <mat-form-field appearance="fill" [class.has-error]="forControl.invalid && forControl.touched">
+                    <mat-label>الى</mat-label>
+                    <mat-select [(ngModel)]="for" 
+                    name="for"
+                    required
+                    #forControl="ngModel"
+                    >
+                      <mat-option value="products">Products</mat-option>
+                      <mat-option value="service">Service</mat-option>
+                      <mat-option value="winch">Winch</mat-option>
+                    </mat-select>
+                    <mat-error class="text-danger" *ngIf="forControl.invalid && forControl.touched">يجب ادخال المنطقة</mat-error>
+                  </mat-form-field>
+            </div>
+            
+            <div class="col-md-6" >
+                <mat-form-field appearance="fill" [class.has-error]="clientControl.invalid && clientControl.touched">
+                    <mat-label>جميع العملاء</mat-label>
+                    <mat-select [(ngModel)]="client" 
+                    name="client"
+                    required
+                    #clientControl="ngModel"
+                    (ngModelChange)="clientBoolen($event)"
+                    >
+                      <mat-option [value]=true>نعم</mat-option>
+                      <mat-option [value]=false>لا</mat-option>
+                    </mat-select>
+                    <mat-error class="text-danger" *ngIf="clientControl.invalid && clientControl.touched">يجب ادخال </mat-error>
+                  </mat-form-field>
+            </div>
+
+            
+            <div class="col-md-6" *ngIf="allClients">
+                <mat-form-field appearance="fill" [class.has-error]="clientdropControl.invalid && clientdropControl.touched">
+                    <mat-label>العملاء</mat-label>
+                    <mat-select [(ngModel)]="clientMulti" 
+                    name="clientMulti"
+                    multiple
+                    required
+                    #clientdropControl="ngModel"
+                    >
+                      <mat-option *ngFor="let client of clients" [value]="client._id">{{client.user.name}}</mat-option>
+                    </mat-select>
+                    <mat-error class="text-danger" *ngIf="clientdropControl.invalid && clientdropControl.touched">يجب ادخال </mat-error>
+                  </mat-form-field>
+            </div>
+            
+            <div class="col-md-6" >
+                <mat-form-field appearance="fill" [class.has-error]="vendorControl.invalid && vendorControl.touched">
+                    <mat-label>جميع الميكانكيون</mat-label>
+                    <mat-select [(ngModel)]="vendor" 
+                    name="vendor"
+                    required
+                    #vendorControl="ngModel"
+                    (ngModelChange)="vendorBoolen($event)"
+                    >
+                      <mat-option [value]=true>نعم</mat-option>
+                      <mat-option [value]=false>لا</mat-option>
+                    </mat-select>
+                    <mat-error class="text-danger" *ngIf="vendorControl.invalid && vendorControl.touched">يجب ادخال </mat-error>
+                  </mat-form-field>
+            </div>
+
+                        
+            <div class="col-md-6" *ngIf="allVendors">
+                <mat-form-field appearance="fill" [class.has-error]="vendordropControl.invalid && vendordropControl.touched">
+                    <mat-label>الميكانكيون</mat-label>
+                    <mat-select [(ngModel)]="vendorMulti" 
+                    name="vendorMulti"
+                    multiple
+                    required
+                    #vendordropControl="ngModel"
+                    >
+                      <mat-option *ngFor="let vendor of vendors" [value]="vendor._id">{{vendor.user.name}}</mat-option>
+                    </mat-select>
+                    <mat-error class="text-danger" *ngIf="vendordropControl.invalid && vendordropControl.touched">يجب ادخال </mat-error>
+                  </mat-form-field>
+            </div>
+            
+            <div class="col-md-6">
+                <mat-form-field appearance="fill">
+                    <mat-label>تاريخ البدء</mat-label>
+                    <input matInput [matDatepicker]="picker" [(ngModel)]="startDate" name="startDate">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+            </div>
+        </div>
+        <div class="flex-button">
+            <button mat-raised-button 
+            color="primary"
+            *ngIf="!updateFlag"
+            [disabled]="form.invalid">اضف</button>
+            <button mat-raised-button 
+            color="primary"
+            *ngIf="updateFlag"
+            [disabled]="form.invalid">تعديل</button>
+        </div>      
+        </form>
+        </div>
+      </div>
+    </div>
+    </div>

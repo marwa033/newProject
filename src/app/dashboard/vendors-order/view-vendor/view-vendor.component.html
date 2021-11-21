@@ -1,0 +1,141 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-spin-clockwise-fade-rotating" [fullScreen] = "true"></ngx-spinner>
+<div class="adddistrict">
+    <div class="container">
+    <div class="card shadow ">
+        <h4 class="card-header">
+          بيانات طلب الميكانيكى
+        </h4>
+        <!-- <h4 class="card-header" *ngIf="updateFlag">
+          تعديل منطقة 
+        </h4> -->
+        <div class="card-body">
+            <form class="example-form" #form="ngForm" >
+                <div class="row">
+                <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill">
+                  <mat-label>طلب الاوردر</mat-label>
+                  <input matInput 
+                  [(ngModel)]="orderId" 
+                  name= "orderId"  
+                  autocomplete="off"
+                  readonly>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill">
+                  <mat-label>حالة الطلب</mat-label>
+                  <input matInput 
+                  [(ngModel)]="state" 
+                  name= "state"  
+                  autocomplete="off"
+                  readonly>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>اسم الفنى</mat-label>
+                    <input matInput 
+                    [(ngModel)]="vendorName" 
+                    name= "vendorName"  
+                    autocomplete="off"
+                    readonly>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                
+          <button mat-raised-button color="accent" (click)="goTo()">تفاصيل الفنى</button>
+                <!-- <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>رقم هاتف الميكانيكى</mat-label>
+                    <input matInput 
+                    [(ngModel)]="vendorPhone" 
+                    name= "vendorPhone"  
+                    autocomplete="off"
+                    readonly>
+                </mat-form-field> -->
+            </div>
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>اسم العميل</mat-label>
+                    <input matInput 
+                    [(ngModel)]="clientName" 
+                    name= "clientName"  
+                    autocomplete="off"
+                    readonly>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>رقم هاتف العميل</mat-label>
+                    <input matInput 
+                    [(ngModel)]="clientPhone" 
+                    name= "clientPhone"  
+                    autocomplete="off"
+                    readonly>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>التاريخ</mat-label>
+                    <input matInput 
+                    [(ngModel)]="date" 
+                    name= "date"  
+                    autocomplete="off"
+                    readonly>
+                </mat-form-field>
+            </div>
+            <!-- <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>موديل السيارة</mat-label>
+                    <input matInput 
+                    [(ngModel)]="carModel" 
+                    name= "carModel"  
+                    autocomplete="off"
+                    readonly>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>لون السيارة</mat-label>
+                    <input matInput 
+                    [(ngModel)]="carColor" 
+                    name= "carColor"  
+                    autocomplete="off"
+                    readonly>
+                </mat-form-field>
+            </div> -->
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>السعر</mat-label>
+                    <input matInput 
+                    [(ngModel)]="price" 
+                    name= "price"  
+                    autocomplete="off"
+                    readonly>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>نسبة الموقع</mat-label>
+                    <input matInput 
+                    [(ngModel)]="appAmount" 
+                    name= "appAmount"  
+                    autocomplete="off"
+                    readonly>
+                </mat-form-field>
+            </div>
+        </div>
+        <!-- <div class="flex-button">
+            <button mat-raised-button 
+            color="primary"
+            *ngIf="!updateFlag"
+            [disabled]="form.invalid">اضف</button>
+            <button mat-raised-button 
+            color="primary"
+            *ngIf="updateFlag"
+            [disabled]="form.invalid">تعديل</button>
+        </div>       -->
+        </form>
+        </div>
+      </div>
+    </div>
+    </div>

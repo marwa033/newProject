@@ -1,0 +1,53 @@
+# Node.js with Angular
+# Build a Node.js project that uses Angular.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+  branches:
+    include:
+    - master
+    
+resources:
+- repo: self
+
+pool:
+  vmImage: 'vs2017-win2016'
+
+variables:
+  buildConfiguration: 'Release'
+  ngBuildConfiguration: '--prod'
+
+steps:
+
+- task: DeleteFiles@1
+  displayName: 'Delete JUnit files'
+  inputs:
+    SourceFolder: /junit
+    Contents: 'TEST*.xml'
+
+- task: Npm@1
+  displayName: 'npm install'
+  inputs:
+    command: install
+    workingDir: 
+
+- task: Npm@1
+  displayName: 'Build Angular'
+  inputs:
+    command: custom
+    customCommand: run build2
+    workingDir: 
+
+- task: PublishPipelineArtifact@0
+  inputs:
+    artifactName: angular8PipelineArtifactProd
+    targetPath: '/dist'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '/dist'
+    ArtifactName: angular8BuildArtifactProd
+
+
+

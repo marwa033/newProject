@@ -1,0 +1,142 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-spin-clockwise-fade-rotating" [fullScreen] = "true"></ngx-spinner>
+<div class="addcar">
+    <div class="container">
+    <div class="card shadow ">
+        <h4 class="card-header"
+        *ngIf="!updateFlag">
+        اضافة ونش جديد
+        </h4>
+        <h4 class="card-header"
+        *ngIf="updateFlag">
+          تعديل ونش 
+        </h4>
+        <div class="card-body">
+            <form class="example-form" #form="ngForm" (ngSubmit)="Add(form.value)">
+                <div class="row">
+                <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="arControl.invalid && arControl.touched">
+                  <mat-label>الاسم بالغه العربية</mat-label>
+                  <input matInput 
+                  [(ngModel)]="arname"
+                   name= "arname"
+                   autocomplete="off"
+                   required
+                   #arControl="ngModel">  
+                  <mat-error class="text-danger" *ngIf="arControl.invalid && arControl.touched">يجب ادخال الاسم بالغة العربية</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+            <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="enControl.invalid && enControl.touched">
+              <mat-label>الاسم بالغه الانجليزية</mat-label>
+              <input matInput 
+              [(ngModel)]="enname"
+               name= "enname"
+               autocomplete="off"
+               required
+               #enControl="ngModel">  
+              <mat-error class="text-danger" *ngIf="enControl.invalid && enControl.touched">يجب ادخال الاسم بالغة الانجليزية</mat-error>
+            </mat-form-field>
+        </div>
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="carControl.invalid && carControl.touched">
+                    <mat-label>رقم السيارة</mat-label>
+                    <input matInput 
+                    [(ngModel)]="car" 
+                    name= "car"
+                    autocomplete="off"
+                    required
+                    #carControl="ngModel">
+                    <mat-error class="text-danger" *ngIf="carControl.invalid && carControl.touched">يجب ادخال رقم السيارة</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field appearance="fill" [class.has-error]="latControl.invalid && latControl.touched">
+                    <mat-label>lat</mat-label>
+                    <input matInput 
+                    [(ngModel)]="lat" 
+                    autocomplete="off"
+                    name= "lat"
+                    required
+                    #latControl>
+                    <mat-error class="text-danger" *ngIf="latControl.invalid && latControl.touched">يجب ادخال lat</mat-error>
+                  </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field appearance="fill" [class.has-error]="lngControl.invalid && lngControl.touched">
+                    <mat-label>lng</mat-label>
+                    <input matInput 
+                    [(ngModel)]="lng" 
+                    autocomplete="off"
+                    name= "lng"
+                    required
+                    #lngControl>
+                    <mat-error class="text-danger" *ngIf="lngControl.invalid && lngControl.touched">يجب ادخال lng</mat-error>
+                  </mat-form-field>
+            </div>
+            <div class="col-md-6"></div>
+            <mat-divider></mat-divider>
+            <div class="col-md-6">
+                <mat-form-field appearance="fill" [class.has-error]="userControl.invalid && userControl.touched">
+                    <mat-label>اسم المستخدم</mat-label>
+                    <input matInput 
+                    [(ngModel)]="user" 
+                    autocomplete="off"
+                    name= "user"
+                    required
+                    #userControl="ngModel">
+                    <mat-error class="text-danger" *ngIf="userControl.invalid && userControl.touched">يجب ادخال اسم المستخدم</mat-error>
+                  </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field appearance="fill" [class.has-error]="phoneControl.invalid && phoneControl.touched">
+                    <mat-label>رقم الهاتف</mat-label>
+                    <input matInput 
+                    [(ngModel)]="phone"
+                    autocomplete="off" 
+                    name= "phone"
+                    required
+                    #phoneControl="ngModel">
+                    <mat-error class="text-danger" *ngIf="phoneControl.invalid && phoneControl.touched">يجب ادخال رقم الهاتف</mat-error>
+                  </mat-form-field>
+            </div>
+            
+            <div class="col-md-6" >
+                <mat-form-field appearance="fill" [class.has-error]="emailControl.invalid && emailControl.touched">
+                    <mat-label>البريد الالكترونى</mat-label>
+                    <input matInput [(ngModel)]="email" 
+                    name="email"
+                    required
+                    #emailControl="ngModel"
+                    >
+                    <mat-error class="text-danger" *ngIf="emailControl.invalid && emailControl.touched">يجب ادخال البريد الالكترونى</mat-error>
+                  </mat-form-field>
+            </div>
+
+            <div class="col-md-6" >
+              <mat-form-field appearance="fill" [class.has-error]="passwordControl.invalid && passwordControl.touched">
+                  <mat-label>كلمة السر</mat-label>
+                  <input matInput [(ngModel)]="password" 
+                  name="password"
+                  type="password"
+                  required
+                  #passwordControl="ngModel"
+                  >
+                  <mat-error class="text-danger" *ngIf="passwordControl.invalid && passwordControl.touched">يجب ادخال كلمة السر</mat-error>
+                </mat-form-field>
+          </div>
+        <div class="flex-button">
+            <button mat-raised-button 
+            color="primary"
+            *ngIf="!updateFlag"
+            [disabled]="form.invalid">اضف</button>
+            <button mat-raised-button 
+            color="primary"
+            *ngIf="updateFlag"
+            [disabled]="form.invalid">تعديل</button>
+        </div>   
+        </div>   
+        </form>
+        </div>
+      </div>
+    </div>
+    </div>

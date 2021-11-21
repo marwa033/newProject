@@ -1,0 +1,38 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-spin-clockwise-fade-rotating" [fullScreen] = "true"></ngx-spinner>
+
+
+
+<div class="gene-login gene-session pad-y-xl">
+   <div fxLayout="row" fxLayoutAlign="center start">
+      <div fxLayout="column" fxFlex.xl="540px" fxFlex.lg="540px" fxFlex.md="540px" fxFlex.sm="540px" fxFlex.xs="100">
+         <mat-card class="gene-login-wrapper">
+            <div>
+               <div fxLayout="column" fxLayoutAlign="center center mrgn-b-md">
+                  <div class="login-logo justify-content">
+                     <!-- <img src="assets/img/logo.png"> -->
+                     <h5>Please enter your user information</h5>
+                  </div>
+               </div>
+               <form #form="ngForm" (ngSubmit)="login(form.value)">
+               <div fxLayout="column" fxLayoutAlign="start stretch">
+                 <mat-form-field [class.has-error]="emailControl.invalid && emailControl.touched">
+                  <input matInput placeholder="Enter your email" name="email" required email [(ngModel)]="email" #emailControl="ngModel" autocomplete="off">
+               </mat-form-field>
+               <span style="font-size: smaller;" class="text-danger" *ngIf="emailControl.errors?.required && emailControl.touched">E-mail is required</span>
+               <span style="font-size: smaller;" class="text-danger" *ngIf="emailControl.errors?.email && emailControl.touched">E-mail is invalid</span>
+
+                <mat-form-field [class.has-error]="passwordControl.invalid && passwordControl.touched">
+                  <input matInput placeholder="Enter password" type="password" required min="6" #passwordControl="ngModel" name="password"  [(ngModel)]="password">
+               </mat-form-field>
+               <span style="font-size: smaller;" class="text-danger" *ngIf="passwordControl.errors?.required && passwordControl.touched">Password is required</span>
+               <span style="font-size: smaller;" class="text-danger" *ngIf="passwordControl.errors?.min && passwordControl.touched"> Password must be at least 6 characters long.</span>
+
+                  <button class="success-bg" mat-raised-button [disabled]="!form.valid" >SIGN IN</button>
+                  <!-- <p class="text-center">Don't have an account? <a [routerLink]="['/session/register']" class="primary-text">Click here to create one</a></p> -->
+               </div>
+               </form>
+            </div>
+         </mat-card>
+      </div>
+   </div>
+</div>

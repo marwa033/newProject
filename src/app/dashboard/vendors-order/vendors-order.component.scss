@@ -1,0 +1,60 @@
+*{
+    direction: rtl;
+    text-align: right;
+    // font-family: "Almarai";
+}
+table{
+    transition: none !important;
+    box-shadow: none !important;
+    text-align: center !important;
+}
+.example-container{
+    overflow: auto;
+}
+.mat-elevation-z8{
+    transition: none !important;
+    box-shadow: none !important;
+}
+
+.mat-header-cell, .mat-cell {
+    min-width: 100px;
+    text-align: center;
+    direction: ltr;
+}
+th.mat-header-cell{
+    text-align: center !important;
+}
+.mat-row:hover {
+    background-color: #d2f9f3;
+  }
+
+.container-fluide{
+    padding: 20px;
+}
+h4{
+    text-align: center;
+}
+.pointer{
+    cursor: pointer;
+}
+.rid{
+    display: none;
+}
+p{
+    text-align: center;
+    padding-top: 5px;
+    font-size: large;
+    font-weight: 500;
+    color: #212741;
+}
+.mat-form-field{
+    width: 100%;
+    font-family: "Almarai";
+    direction: rtl;
+    text-align: right;
+}
+button{
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+}

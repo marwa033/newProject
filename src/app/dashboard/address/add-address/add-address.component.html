@@ -1,0 +1,157 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-spin-clockwise-fade-rotating" [fullScreen] = "true"></ngx-spinner>
+<div class="addcar">
+    <div class="container">
+    <div class="card shadow ">
+        <h4 class="card-header"
+        *ngIf="!updateFlag">
+        اضافة عنوان جديد
+        </h4>
+        <h4 class="card-header"
+        *ngIf="updateFlag">
+          تعديل عنوان 
+        </h4>
+        <div class="card-body">
+            <form class="example-form" #form="ngForm" (ngSubmit)="Add(form.value)">
+                <div class="row">
+                <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="titleControl.invalid && titleControl.touched">
+                  <mat-label>العنوان</mat-label>
+                  <input matInput 
+                  [(ngModel)]="title"
+                   name= "title"
+                   autocomplete="off"
+                   required
+                   #titleControl="ngModel">  
+                  <mat-error class="text-danger" *ngIf="titleControl.invalid && titleControl.touched">يجب ادخال العنوان</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="streetControl.invalid && streetControl.touched">
+                    <mat-label> الشارع</mat-label>
+                    <input matInput 
+                    [(ngModel)]="street" 
+                    name= "street"
+                    autocomplete="off"
+                    required
+                    #streetControl="ngModel">
+                    <mat-error class="text-danger" *ngIf="streetControl.invalid && streetControl.touched">يجب ادخال  الشارع</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="buildingControl.invalid && buildingControl.touched">
+                    <mat-label>المبنى</mat-label>
+                    <input matInput 
+                    [(ngModel)]="building" 
+                    name= "building"
+                    autocomplete="off"
+                    required
+                    #buildingControl>
+                    <mat-error class="text-danger" *ngIf="buildingControl.invalid && buildingControl.touched">يجب ادخال رقم المبنى</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field appearance="fill" [class.has-error]="floorControl.invalid && floorControl.touched">
+                    <mat-label>الدور</mat-label>
+                    <input matInput 
+                    [(ngModel)]="floor" 
+                    autocomplete="off"
+                    name= "floor"
+                    required
+                    #floorControl>
+                    <mat-error class="text-danger" *ngIf="floorControl.invalid && floorControl.touched">يجب ادخال الدور</mat-error>
+                  </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field appearance="fill" [class.has-error]="apartmentControl.invalid && apartmentControl.touched">
+                    <mat-label>الشقة</mat-label>
+                    <input matInput 
+                    [(ngModel)]="apartment" 
+                    autocomplete="off"
+                    name= "apartment"
+                    required
+                    #apartmentControl>
+                    <mat-error class="text-danger" *ngIf="apartmentControl.invalid && apartmentControl.touched">يجب ادخال الشقة</mat-error>
+                  </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field appearance="fill" [class.has-error]="latControl.invalid && latControl.touched">
+                    <mat-label>lat</mat-label>
+                    <input matInput 
+                    [(ngModel)]="lat" 
+                    autocomplete="off"
+                    name= "lat"
+                    required
+                    #latControl>
+                    <mat-error class="text-danger" *ngIf="latControl.invalid && latControl.touched">يجب ادخال lat</mat-error>
+                  </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field appearance="fill" [class.has-error]="langControl.invalid && langControl.touched">
+                    <mat-label>lang</mat-label>
+                    <input matInput 
+                    [(ngModel)]="lang"
+                    autocomplete="off" 
+                    name= "lang"
+                    required
+                    #langControl>
+                    <mat-error class="text-danger" *ngIf="langControl.invalid && langControl.touched">يجب ادخال lang</mat-error>
+                  </mat-form-field>
+            </div>
+            
+            <div class="col-md-6" >
+                <mat-form-field appearance="fill" [class.has-error]="districtControl.invalid && districtControl.touched">
+                    <mat-label>المنطقة</mat-label>
+                    <mat-select [(ngModel)]="districtId" 
+                    name="districtId"
+                    required
+                    #districtControl="ngModel"
+                    (ngModelChange)="getSubDistrict($event)"
+                    >
+                      <mat-option *ngFor="let district of districts" [value]="district._id">
+                        {{district.name}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error class="text-danger" *ngIf="districtControl.invalid && districtControl.touched">يجب ادخال المنطقة</mat-error>
+                  </mat-form-field>
+            </div>
+
+            <div class="col-md-6" >
+                <mat-form-field appearance="fill" [class.has-error]="districtSubControl.invalid && districtSubControl.touched">
+                    <mat-label>sub district</mat-label>
+                    <mat-select [(ngModel)]="districtSubId" 
+                    name="districtSubId"
+                    required
+                    #districtSubControl="ngModel"
+                    >
+                      <mat-option *ngFor="let sub of subDistrict" [value]="sub._id">
+                        {{sub.name}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error class="text-danger" *ngIf="districtSubControl.invalid && districtSubControl.touched">يجب ادخال المنطقة</mat-error>
+                  </mat-form-field>
+            </div>
+            
+            <div class="col-md-6">
+                <mat-form-field appearance="fill" >
+                    <mat-label>Comment</mat-label>
+                    <textarea matInput 
+                    [(ngModel)]="comment" 
+                    name= "comment"></textarea>
+                  </mat-form-field>
+            </div>
+        </div>
+        <div class="flex-button">
+            <button mat-raised-button 
+            color="primary"
+            *ngIf="!updateFlag"
+            [disabled]="form.invalid">اضف</button>
+            <button mat-raised-button 
+            color="primary"
+            *ngIf="updateFlag"
+            [disabled]="form.invalid">تعديل</button>
+        </div>      
+        </form>
+        </div>
+      </div>
+    </div>
+    </div>

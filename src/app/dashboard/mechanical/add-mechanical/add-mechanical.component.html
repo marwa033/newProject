@@ -1,0 +1,332 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-spin-clockwise-fade-rotating" [fullScreen] = "true"></ngx-spinner>
+<div class="addcar">
+    <div class="container">
+    <div class="card shadow ">
+        <h4 class="card-header"
+        *ngIf="!updateFlag">
+          اضافة فئة جديده
+        </h4>
+        <h4 class="card-header"
+        *ngIf="updateFlag">
+          تعديل فئة 
+        </h4>
+        <div class="card-body">
+            <form class="example-form" #form="ngForm" (ngSubmit)="Add(form.value)">
+                <div class="row">
+                <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="arControl.invalid && arControl.touched">
+                  <mat-label>الاسم بالغه العربية</mat-label>
+                  <input matInput 
+                  autocomplete="off"
+                  [(ngModel)]="arname"
+                   name= "arname"
+                   required
+                   #arControl="ngModel">  
+                  <mat-error class="text-danger" *ngIf="arControl.invalid && arControl.touched">يجب ادخال الاسم بالغه العربية</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="enControl.invalid && enControl.touched">
+                    <mat-label>الاسم بالغه الانجليزية</mat-label>
+                    <input matInput 
+                    [(ngModel)]="enname" 
+                    name= "enname"
+                    autocomplete="off"
+                    required
+                    #enControl="ngModel">
+                    <mat-error class="text-danger" *ngIf="enControl.invalid && enControl.touched">يجب ادخال الاسم بالغه الانجليزية</mat-error>
+                </mat-form-field>
+            </div>
+            
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="arBioControl.invalid && arBioControl.touched">
+                  <mat-label>الوصف بالغه العربية</mat-label>
+                  <input matInput 
+                  [(ngModel)]="arBio"
+                   name= "arBio"
+                   required
+                   autocomplete="off"
+                   #arBioControl="ngModel">  
+                  <mat-error class="text-danger" *ngIf="arBioControl.invalid && arBioControl.touched">يجب ادخال الوصف بالغه العربية</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="enBioControl.invalid && enBioControl.touched">
+                    <mat-label>الوصف بالغه الانجليزية</mat-label>
+                    <input matInput 
+                    [(ngModel)]="enBio" 
+                    name= "enBio"
+                    autocomplete="off"
+                    required
+                    #enBioControl="ngModel">
+                    <mat-error class="text-danger" *ngIf="enBioControl.invalid && enBioControl.touched">يجب ادخال الوصف بالغه الانجليزية</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="arAddressControl.invalid && arAddressControl.touched">
+                  <mat-label>العنوان بالغه العربية</mat-label>
+                  <input matInput 
+                  [(ngModel)]="arAddress"
+                   name= "arAddress"
+                   autocomplete="off"
+                   required
+                   #arAddressControl="ngModel">  
+                  <mat-error class="text-danger" *ngIf="arAddressControl.invalid && arAddressControl.touched">يجب ادخال العنوان بالغه العربية</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="enAddressControl.invalid && enAddressControl.touched">
+                    <mat-label>العنوان بالغه الانجليزية</mat-label>
+                    <input matInput 
+                    [(ngModel)]="enAddress" 
+                    name= "enAddress"
+                    autocomplete="off"
+                    required
+                    #enAddressControl="ngModel">
+                    <mat-error class="text-danger" *ngIf="enAddressControl.invalid && enAddressControl.touched">يجب ادخال العنوان بالغه الانجليزية</mat-error>
+                </mat-form-field>
+            </div>
+
+           <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="latControl.invalid && latControl.touched">
+                    <mat-label>lat</mat-label>
+                    <input matInput 
+                    [(ngModel)]="lat" 
+                    name= "lat"
+                    autocomplete="off"
+                    required
+                    #latControl="ngModel">
+                    <mat-error class="text-danger" *ngIf="latControl.invalid && latControl.touched">يجب ادخال lat</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="lngControl.invalid && lngControl.touched">
+                    <mat-label>lng</mat-label>
+                    <input matInput 
+                    [(ngModel)]="lng" 
+                    autocomplete="off"
+                    name= "lng"
+                    required
+                    #lngControl="ngModel">
+                    <mat-error class="text-danger" *ngIf="lngControl.invalid && lngControl.touched">يجب ادخال lng</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field appearance="fill">
+                    <mat-label>الفئة</mat-label>
+                    <mat-select [(ngModel)]="parentId" 
+                    name="parentId"
+                    (ngModelChange)="getSubCategories($event)">
+                      <mat-option *ngFor="let category of categories" [value]="category._id">
+                        {{category.name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+            </div> 
+            
+            <div class="col-md-6">
+                <mat-form-field appearance="fill">
+                    <mat-label>الفئة sub</mat-label>
+                    <mat-select [(ngModel)]="categoryId" 
+                    name="categoryId">
+                      <mat-option *ngFor="let category of subCategories" [value]="category._id">
+                        {{category.name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+            </div> 
+            
+            <div class="col-md-6">
+                <mat-form-field appearance="fill">
+                    <mat-label>المنطقة</mat-label>
+                    <mat-select [(ngModel)]="districtparentId" name="districtparentId"
+                    (ngModelChange)="getSubDistrict($event)">
+                      <mat-option *ngFor="let district of districts" [value]="district._id">
+                        {{district.name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+            </div> 
+            
+            <div class="col-md-6">
+                <!-- <mat-form-field appearance="fill">
+                    <mat-label> sub المنطقة</mat-label>
+                    <mat-select [(ngModel)]="subId" name="subId">
+                      <mat-option *ngFor="let district of subDistricts" [value]="district._id">
+                        {{district.name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field> -->
+            </div> 
+
+            <div class="col-md-6">
+                <label>صورة</label>
+                <img [src]="imageSrc" style="max-width:300px;max-height:300px"
+                onerror= "this.src='assets/img/1274512-placeholder.png';"/><br>
+                <button (click)="uploadFile()" type="button" mat-raised-button >Upload</button>
+            <mat-form-field class="rid">
+                <input matInput placeholder="Color" name="imageSrc" [(ngModel)] = "imageSrc">
+            </mat-form-field>
+            </div>
+              
+            <div class="col-md-6">
+                <label>cover</label>
+                <img [src]="coverSrc" style="max-width:300px;max-height:300px"
+                onerror= "this.src='assets/img/1274512-placeholder.png';"/><br>
+                <button (click)="uploadCover()" type="button" mat-raised-button >Upload</button>
+            <mat-form-field class="rid">
+                <input matInput placeholder="Color" name="coverSrc" [(ngModel)] = "coverSrc">
+            </mat-form-field>
+            </div>
+
+
+
+
+
+
+
+        <div class="container mt-5">
+            <button mat-raised-button  type="button"
+            color="accent" (click)="openLg(content)">اضف ايام العمل</button>
+            <table class="table my-3" *ngIf="workingDays">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">اليوم</th>
+                    <th scope="col">من</th>
+                    <th scope="col">الى</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let obj of selectedFeatures; let i = index">
+                      <td>{{i + 1}}</td>
+                    <td>{{obj.day}}</td>
+                    <td>{{obj.from}}</td>
+                    <td>{{obj.to}}</td>
+                    <td> <mat-icon (click) = "removeTask(i)">delete</mat-icon> </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>  
+
+
+
+
+
+
+
+
+            
+              <div class="col-md-6 mt-3">
+                <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="userControl.invalid && userControl.touched">
+                  <mat-label>الاسم المستخدم</mat-label>
+                  <input matInput 
+                  [(ngModel)]="user"
+                   name= "user"
+                   autocomplete="off"
+                   required
+                   #userControl="ngModel">  
+                  <mat-error class="text-danger" *ngIf="userControl.invalid && userControl.touched">يجب ادخال الاسم المستخدم</mat-error>
+                </mat-form-field>
+            </div>
+            <!-- <div class="col-md-6 mt-3">
+                <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="emailControl.invalid && emailControl.touched">
+                  <mat-label>البريد الالكترونى</mat-label>
+                  <input matInput 
+                  [(ngModel)]="email"
+                   name= "email"
+                   required
+                   #emailControl="ngModel">  
+                  <mat-error class="text-danger" *ngIf="emailControl.invalid && emailControl.touched">يجب ادخال البريد الالكترونى</mat-error>
+                </mat-form-field>
+            </div> -->
+            
+            <div class="col-md-6 mt-3">
+                <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="phoneControl.invalid && phoneControl.touched">
+                  <mat-label>رقم الهاتف</mat-label>
+                  <input matInput 
+                  [(ngModel)]="phone"
+                   name= "phone"
+                   autocomplete="off"
+                   required
+                   #phoneControl="ngModel">  
+                  <mat-error class="text-danger" *ngIf="phoneControl.invalid && phoneControl.touched">يجب ادخال رقم الهاتف</mat-error>
+                </mat-form-field>
+            </div>
+            
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="passwordControl.invalid && passwordControl.touched">
+                  <mat-label>كلمة السر</mat-label>
+                  <input matInput 
+                  [(ngModel)]="password"
+                   name= "password"
+                   type="password"
+                   autocomplete="off"
+                   required
+                   #passwordControl="ngModel">  
+                  <mat-error class="text-danger" *ngIf="passwordControl.invalid && passwordControl.touched">يجب ادخال كلمة السر</mat-error>
+                </mat-form-field>
+            </div>
+            
+
+        </div>
+        <div class="flex-button">
+            <button mat-raised-button 
+            color="primary"
+            *ngIf="!updateFlag"
+            [disabled]="form.invalid">اضف</button>
+            <button mat-raised-button 
+            color="primary"
+            *ngIf="updateFlag"
+            [disabled]="form.invalid">تعديل</button>
+        </div>      
+        </form>
+        </div>
+      </div>
+    </div>
+    </div>
+
+
+
+
+    <ng-template #content let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title">اضف ايام العمل </h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form #form="ngForm" >
+        <div class="modal-body">
+            <section class="row">
+                <section class="col-md-6">
+                    <mat-form-field>
+                        <mat-label>اليوم</mat-label>
+                        <mat-select name="day"  [(ngModel)]="day">
+                          <mat-option value="1">{{'الاحد' | translate}}</mat-option>
+                          <mat-option value="2">{{'الاثنين' | translate}}</mat-option>
+                          <mat-option value="3">{{'الثلاثاء' | translate}}</mat-option>
+                          <mat-option value="4">{{'الاربع' | translate}}</mat-option>
+                          <mat-option value="5">{{'الخميس' | translate}}</mat-option>
+                          <mat-option value="6">{{'الجمعة' | translate}}</mat-option>
+                          <mat-option value="7">{{'السبت' | translate}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                </section>
+                <section class="col-md-6">
+                    <mat-form-field>
+                        <input matInput placeholder="{{'من' | translate}}" name="from"  type="time"  [(ngModel)]="from">
+                    </mat-form-field>
+                </section>
+                <section class="col-md-6">
+                    <mat-form-field>
+                        <input matInput placeholder="{{'الى' | translate}}" name="to" type="time"  [(ngModel)]="to">
+                    </mat-form-field>
+                </section>
+            </section>
+       </div>
+        <div class="modal-footer">
+          <button class="primary-bg" type="button" mat-raised-button (click)="onAdd()">{{'Save' | translate}}</button>
+        </div>
+      </form> 
+      </ng-template>

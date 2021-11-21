@@ -1,0 +1,82 @@
+<!-- <ngx-spinner bdColor = "rgba(51, 51, 51, 0.8)" size = "medium" color = "#fff" type = "square-jelly-box" [fullScreen] = "true">
+   </ngx-spinner> -->
+<div id = "main-app" class="app sidebar-color-dark header-color-dark" [dir]="layout" [ngClass]="{'app-dark': dark, 'collapsed-sidebar': coreService.collapseSidebar, 'compact-sidebar': compactSidebar, 'customizer-in': customizerIn}" [class.side-panel-opened]="coreService.sidenavOpen" [class.side-panel-closed]="!coreService.sidenavOpen">
+<mat-sidenav-container class="gene-container">
+   <mat-sidenav #sidenav [(mode)]="coreService.sidenavMode" [(opened)]="coreService.sidenavOpen" class="sidebar-area">
+      <ms-side-bar [menuList]="menuItems" [verticalMenuStatus] = true></ms-side-bar>
+   </mat-sidenav>
+   <mat-toolbar class="gene-header-toolbar">
+      <div class="gene-ham-icon" tourAnchor="start.tour" >
+         <button class="" mat-mini-fab color="primary" mat-card-icon (click)="toggleSidebar()">
+            <mat-icon>menu</mat-icon>
+         </button>
+      </div>
+      <span fxFlex></span>
+      <div class="secondary-menu">
+         <button fxHide="true" fxHide.gt-sm="false" mat-button class="fullscreen-toggle" (click)="toggleFullscreen()" tourAnchor="tour-full-screen">
+            <mat-icon *ngIf="!isFullscreen">fullscreen</mat-icon>
+            <mat-icon *ngIf="isFullscreen">fullscreen_exit</mat-icon>
+         </button>
+         <button class="user-button" mat-button [matMenuTriggerFor]="menu">
+            <div fxLayout="row" fxLayoutAlign="center center">
+               <mat-icon>account_circle</mat-icon>
+            </div>
+         </button>
+         <!-- <div class="language-dropdown-wrap">
+            <button mat-button [matMenuTriggerFor]="menu_activator">
+              <img width="24" height="24" [src]="selectImage">
+            </button>
+            <mat-menu #menu_activator>
+               <div class="gene-lang-popup">
+                  <div class="language-title pad-all-sm primary-bg" fxLayout="row wrap" fxLayoutAlign="space-between center">
+                     <div class="sec-title" fxFlex="60">
+                        <h4 class="mrgn-b-none">{{'Languages'|translate}}</h4>
+                     </div>
+                  </div>
+                  <div  fxLayout="row wrap" class="pad-all-xs">
+                     <ng-container *ngFor="let lang of translate.getLangs()">
+                        <ng-container *ngFor="let language of langArray">
+                           <mat-card class="mat-pad-none lang-wrap" *ngIf="language.value == lang" fxFlex="calc(70% - 0.7rem)" >
+                              
+                              <a class="pad-all-xs gene-block" href="javascript:void(0)" (click)="setLang(lang)">
+                                 <img class="mrgn-r-xs" width="25" height="14" src="{{language.img}}">
+                                 <span >{{language.name}}</span>
+                                 
+                              </a>
+                           </mat-card>
+                        </ng-container>
+                     </ng-container>
+                  </div>
+               </div>
+            </mat-menu>
+         </div> -->
+      </div>
+   </mat-toolbar>
+   <div class="gene-base-container" #scrollContainer>
+      <div class="inner-container" fxLayout="row wrap">
+         <div class="full-wid" fxFlex="100">
+            <router-outlet></router-outlet>
+            <!-- <ngx-loading-bar></ngx-loading-bar> -->
+         </div>
+         <div class="footer-wrap pad-t-none full-wid" fxFLex="100">
+            <ms-footer></ms-footer>
+         </div>
+      </div>
+   </div>
+</mat-sidenav-container>
+</div>
+<mat-menu class="user-menu" x-position="before" y-position="below" #menu="matMenu">
+    <button (click)="profile()" mat-menu-item>
+         <mat-icon>account_circle</mat-icon>
+         <span >{{'Profile'|translate}}</span>
+      </button>
+      <button (click)="password()" mat-menu-item>
+         <mat-icon>https</mat-icon>
+         <span >{{'Change Password'|translate}}</span>
+      </button>
+   <mat-divider></mat-divider>
+   <button (click)="logOut()" mat-menu-item>
+      <mat-icon>exit_to_app</mat-icon>
+      <span>{{'Logout'|translate}}</span>
+   </button>
+</mat-menu>
